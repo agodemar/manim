@@ -1,0 +1,12 @@
+See project scour
+
+https://github.com/scour-project/scour
+
+>> pip install scour
+
+Workaround found for SVGMobject:
+
+1. Use Inkscape as usual to produce your SVG --> PDF
+2. Convert your PDF back to SVG with pdf2svg
+3. Use yor <file-name>_OK.svg in manim
+

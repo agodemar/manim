@@ -298,7 +298,8 @@ class SVGMobject(VMobject):
         if not isinstance(element, minidom.Element):
             return
         if element.hasAttribute('id'):
-            return element
+            # see: https://stackoverflow.com/questions/57844550/unable-to-add-svgmobject-to-scene-in-manim
+            return [element]
         for e in element.childNodes:
             all_childNodes_have_id.append(self.get_all_childNodes_have_id(e))
         return self.flatten([e for e in all_childNodes_have_id if e])

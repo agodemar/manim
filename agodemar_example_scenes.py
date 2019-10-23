@@ -128,6 +128,25 @@ class AddingMoreText(Scene):
 """
 Run this class with the command:
 
+>> python -m manim agodemar_example_scenes.py TypesOfText -pl
+"""
+
+class TypesOfText(Scene): 
+    def construct(self): 
+        typesOfText = CustomTextMobject(r"""
+            This is a regular text,
+            $\frac{x}{y}$, $\dfrac{x}{y}$,
+            \[
+              z = \frac{1}{x^2+y^2}
+            \]
+            """)
+        self.play(Write(typesOfText))
+        self.wait(3)
+
+
+"""
+Run this class with the command:
+
 >> python -m manim agodemar_example_scenes.py GuITFun -pl
 """
 
@@ -184,6 +203,27 @@ class GuITFun(Scene):
         self.add(guit2)
         self.play(FadeIn(guit2))
         self.wait(5)
+
+
+"""
+Run this class with the command:
+
+>> python -m manim agodemar_example_scenes.py SimpleSVG -pl
+"""
+
+class SimpleSVG(Scene): 
+    def construct(self): 
+        SVG_FILE = os.path.join(
+        os.path.dirname(os.path.realpath(__file__)),
+            "files",
+            "pippo.svg") # "GuITmeeting_2019_logo.svg" "Mole_silhouette.svg" "pippo.svg" # scrubbed svg
+        # NOTICE: get rid of <defs/> tag in svg file
+        svg = SVGMobject(SVG_FILE)
+        svg.scale(3.5)
+        self.add(svg)
+        self.play(FadeIn(svg))
+        self.wait(3)
+
 
 class RotateAndHighlight(Scene):
     #Rotation of text and highlighting with surrounding geometries
