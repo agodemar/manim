@@ -145,10 +145,11 @@ class GuITFun(Scene):
 
         self.add(quote)
         self.add(author)
-        self.wait(2)
+        self.wait(3)
         self.play(Transform(quote,quote2),ApplyMethod(author.move_to,quote2.get_corner(DOWN+RIGHT)+DOWN+2*LEFT))
         self.play(ApplyMethod(author.scale,1.5))
         author.match_color(quote2)
+        self.wait(4)
         self.play(FadeOut(quote))
         
         self.wait(1)
@@ -182,7 +183,7 @@ class GuITFun(Scene):
         guit2.set_color(GREEN_E)
         self.add(guit2)
         self.play(FadeIn(guit2))
-
+        self.wait(5)
 
 class RotateAndHighlight(Scene):
     #Rotation of text and highlighting with surrounding geometries
