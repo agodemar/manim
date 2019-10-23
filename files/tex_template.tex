@@ -1,0 +1,84 @@
+\PassOptionsToPackage{hyphens}{url}% avoids option clashes btw url/xcolor/etc...
+\documentclass[preview]{standalone}
+
+\usepackage[T1]{fontenc}
+\usepackage[full]{textcomp}
+\usepackage[utf8]{inputenc}
+
+%-------------------------------------------------------------------------------------
+% MathTime Professional 2
+
+\usepackage{newtxtext} % set Times as the default text font
+
+% The following loads mtpro and defines some common MTPro options [2, 4]
+
+\usepackage[complete,%
+   subscriptcorrection,slantedGreek,nofontinfo,%
+   mtpcal,mtpscr,% mtpluscal,%mtpcal,%
+   mtphrd]{mtpro2}
+
+%% see mtp2.tex
+
+% Options for blackboard bold fonts [2.9]:
+%   mtphrb - holey roman bold        mtpbb - blackboard bold
+%   mtphrd - holey roman bold dark   mtpbbd - blackboard bold dark
+%   mtphbi - holey bold italic       mtpbbi - blackboard bold italic
+
+% Options for alternate character sets [2.6, 2.7]:
+%   mtpcal - assigns Math Script to the math alphabets \mathcal and \mathbcal,
+%   overwriting the default math calligraphic typeface
+%   mtpccal - assigns Math Curly to the math alphabets \mathcal and \mathbcal,
+%   overwriting the default math calligraphic typeface
+%   mtpscr - assigns Math Script to the new math alphabets \mathscr and \mathbscr,
+%       leaving \mathcal unchanged
+%   mtpfrak - assigns Math Fraktur to a new math alphabet \mathfrak
+
+% Options for AMS symbols
+%   amssymbols - makes the mtpro2 AMS symbols available
+
+% Optionally load the following package to use heavy symbols in place of bold symbols
+%\usepackage{bm}
+
+%----------------------------------------------------------------------
+% math
+
+\usepackage[intlimits]{mathtools}
+
+%----------------------------------------------------------------------
+% font for Aspect Ratio
+
+%\usepackage{ar}% original package by Claudio Beccari (based on Computer Modern Roman)
+\usepackage[TM]{ar}% AR ligature based on Times font design
+%\newcommand{\AR}{{\ARtm}}
+%\newcommand{\ARb}{{\ARtmb}}
+
+\usepackage{relsize}
+\usepackage{url}
+\usepackage{guit}
+\usepackage{FiraSans}
+\usepackage{tikz}
+
+\usepackage[english]{babel}
+%\usepackage{amsmath}
+%\usepackage{amssymb}
+\usepackage{dsfont}
+\usepackage{setspace}
+\usepackage{tipa}
+\usepackage{relsize}
+\usepackage{textcomp}
+\usepackage{mathrsfs}
+\usepackage{calligra}
+\usepackage{wasysym}
+\usepackage{ragged2e}
+\usepackage{physics}
+\usepackage{xcolor}
+\usepackage{microtype}
+\DisableLigatures{encoding = *, family = * }
+%\usepackage[UTF8]{ctex}
+\linespread{1}
+
+\begin{document}
+
+YourTextHere
+
+\end{document}

@@ -38,14 +38,18 @@ def generate_tex_file(expression, template_tex_file_body):
 
 
 def tex_to_dvi(tex_file):
-    result = tex_file.replace(".tex", ".dvi" if not TEX_USE_CTEX else ".xdv")
+    result_ = tex_file.replace(".tex", ".dvi" if not TEX_USE_CTEX else ".xdv")
+	# avoid backslashes in paths
+    result = result_.replace("\\", "/")
+    print("DEBUG - tex_to_dvi - result: {}".format(result))
     if not os.path.exists(result):
         commands = [
             "latex",
+            "-output-format=dvi",
             "-interaction=batchmode",
             "-halt-on-error",
-            "-output-directory=\"{}\"".format(consts.TEX_DIR),
-            "\"{}\"".format(tex_file),
+            "-output-directory=\"{}\"".format(consts.TEX_DIR.replace("\\", "/")),
+            "\"{}\"".format(tex_file.replace("\\", "/")),
             ">",
             os.devnull
         ] if not TEX_USE_CTEX else [
@@ -53,12 +57,14 @@ def tex_to_dvi(tex_file):
             "-no-pdf",
             "-interaction=batchmode",
             "-halt-on-error",
-            "-output-directory=\"{}\"".format(consts.TEX_DIR),
+            "-output-directory=\"{}\"".format(consts.TEX_DIR.replace("\\", "/")),
             "\"{}\"".format(tex_file),
             ">",
             os.devnull
         ]
+        print("DEBUG - tex_to_dvi - commands: {}".format(" ".join(commands)))
         exit_code = os.system(" ".join(commands))
+        print("DEBUG - tex_to_dvi - exit_code: {}".format(exit_code))
         if exit_code != 0:
             log_file = tex_file.replace(".tex", ".log")
             raise Exception(
@@ -75,7 +81,10 @@ def dvi_to_svg(dvi_file, regen_if_exists=False):
     Returns a list of PIL Image objects for these images sorted as they
     where in the dvi
     """
-    result = dvi_file.replace(".dvi" if not TEX_USE_CTEX else ".xdv", ".svg")
+    result_ = dvi_file.replace(".dvi" if not TEX_USE_CTEX else ".xdv", ".svg")
+	# avoid backslashes in paths
+    result = result_.replace("\\", "/")
+    print("DEBUG - dvi_to_svg - result: {}".format(result))
     if not os.path.exists(result):
         commands = [
             "dvisvgm",
@@ -88,5 +97,7 @@ def dvi_to_svg(dvi_file, regen_if_exists=False):
             ">",
             os.devnull
         ]
-        os.system(" ".join(commands))
+        print("DEBUG - dvi_to_svg - commands: {}".format(" ".join(commands)))
+        exit_code = os.system(" ".join(commands))
+        print("DEBUG - dvi_to_svg - exit_code: {}".format(exit_code))
     return result
