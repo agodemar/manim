@@ -84,9 +84,38 @@ class CustomTextMobject(TextMobject):
     }
 
 
+template_tex_file = os.path.join(
+    os.path.dirname(os.path.realpath(__file__)),
+    "files",
+    "tex_template.tex"
+)
+with open(template_tex_file, "r") as infile:
+    template_tex_file_body = infile.read()
+    template_tex_file_body = template_tex_file_body.replace(
+        consts.TEX_TEXT_TO_REPLACE,
+        "\\begin{align*}\n" + consts.TEX_TEXT_TO_REPLACE + "\n\\end{align*}"
+    )
+
+
+class CustomTexMobject(TexMobject):
+    CONFIG = {
+        "template_tex_file_body": template_tex_file_body,
+    }
+
+
+class TestCustomTexMobject(Scene):
+    def construct(self):
+        tex = CustomTexMobject(r"""
+            z & = f(x,y) \\
+            \dot{x} & = g(z, u)
+            """)
+        self.add(tex)
+        self.wait(2)
+
+
 class AddingText(Scene):
     #Adding text on the screen
-    def construct(self):		
+    def construct(self):
         my_first_text = CustomTextMobject("Writing with manim is fun")
         second_line = CustomTextMobject("and easy to do!")
         second_line.next_to(my_first_text,DOWN)
@@ -238,6 +267,60 @@ class SimpleSVG(Scene):
         svg.scale(3.5)
         self.add(svg)
         self.play(FadeIn(svg))
+        self.wait(3)
+
+
+class GuITFun2(Scene):
+    def construct(self): 
+        guit = CustomTextMobject(r"\guit")
+        guit.scale(6.0)
+        guit.move_to(3*LEFT + 1.79*UP)
+        self.add(guit)
+        
+        SVG_FILE_1 = os.path.join(os.path.dirname(os.path.realpath(__file__)), "files",
+            "meeting_2019_logo_OK.svg")
+        meeting = SVGMobject(SVG_FILE_1)
+        meeting.move_to(2.0*UP + 2*RIGHT)
+        self.add(meeting)
+        self.play(FadeIn(meeting),FadeIn(guit))
+        self.wait(1)
+        #self.play(FadeOut(guit))
+
+        SVG_FILE_2 = os.path.join(os.path.dirname(os.path.realpath(__file__)), "files",
+            "GuIT_logo_no-I_OK.svg")
+        guit_no_I = SVGMobject(SVG_FILE_2)
+        guit_no_I.scale(1.27)
+        guit_no_I.move_to(3*LEFT + 1.56*UP)
+        #self.add(guit_no_I)
+
+        SVG_FILE_3 = os.path.join(os.path.dirname(os.path.realpath(__file__)), "files",
+            "Mole_silhouette_OK.svg")
+        mole = SVGMobject(SVG_FILE_3)
+        mole.set_color(GREEN_E)
+        mole.scale(4.0)
+        mole.move_to(2.45*LEFT + 0.0*UP)
+        self.add(mole)
+
+        self.play(Transform(guit, guit_no_I),
+            FadeIn(mole, lag_ratio = 0.5, run_time = 2))
+
+        #self.play(FadeIn(mole))
+        self.wait(1)
+
+        politecnico = CustomTextMobject(r"""
+            \firaextralight
+            \begin{tabular}{@{}r@{}}
+            Politecnico di Torino \\
+            26 October 2019\\
+            Turin, Italy
+            \end{tabular}
+            """)
+        politecnico.scale(1.0)
+        politecnico.move_to(3.0*DOWN + 1.9*RIGHT)
+        self.add(politecnico)
+        
+        self.play(FadeIn(politecnico))
+        # self.play(ApplyMethod(guit.scale,1.5))
         self.wait(3)
 
 
