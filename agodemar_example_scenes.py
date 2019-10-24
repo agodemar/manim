@@ -305,10 +305,10 @@ class GuITFun2(Scene):
             FadeIn(mole, lag_ratio = 0.5, run_time = 2))
 
         #self.play(FadeIn(mole))
-        self.wait(1)
+        #self.wait(1)
 
         politecnico = CustomTextMobject(r"""
-            \firaextralight
+            \firaextralight % \firathin \firaultralight
             \begin{tabular}{@{}r@{}}
             Politecnico di Torino \\
             26 October 2019\\
@@ -321,8 +321,19 @@ class GuITFun2(Scene):
         
         self.play(FadeIn(politecnico))
         # self.play(ApplyMethod(guit.scale,1.5))
-        self.wait(3)
+        self.wait(4)
+        self.play(
+            FadeOut(politecnico, run_time = 2),
+            FadeOut(mole       , run_time = 2),
+            FadeOut(guit       , run_time = 2),# guit_no_I <-- guit
+            FadeOut(meeting    , run_time = 2))
 
+        url = CustomTextMobject(r"\url{guitex.org}")
+        url.scale(2.0)
+        self.add(url)
+        self.play(FadeIn(url))
+        self.wait(2)
+        self.play(FadeOut(url))
 
 class RotateAndHighlight(Scene):
     #Rotation of text and highlighting with surrounding geometries
